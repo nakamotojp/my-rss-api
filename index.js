@@ -5,7 +5,11 @@ const { buildRssFeed } = require('./src/utils/rssBuilder');
 const { sites } = require('./src/config/sites');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+
+app.get('/', (req, res) => {
+  res.send('Article Scraper API is running. Use /api/feed/:site to get RSS feeds.');
+});
 
 app.get('/api/feed/:site', async (req, res) => {
   try {
